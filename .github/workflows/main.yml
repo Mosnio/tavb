@@ -1,0 +1,29 @@
+name: Test-Machine Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-on-ubuntu:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        program_number: [1,2,3,4,5,6,7,8,9,10]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.11  # Replace with your desired Python version
+
+      - name: Run Python Program
+        run: |
+          pip install requests beautifulsoup4 colorama fake-useragent
+          wget https://github.com/Mosnio/dpy/raw/main/sn/et${{ matrix.program_number }}.py
+          ls
+          python et${{ matrix.program_number }}.py
