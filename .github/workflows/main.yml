@@ -1,4 +1,4 @@
-name: Test-Machine Workflow
+name: Multi-Machine Workflow
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        program_number: [1,2,3,4,5,6,7,8,9,10]
+        program_number: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     steps:
       - name: Checkout code
@@ -27,3 +27,4 @@ jobs:
           wget https://github.com/Mosnio/dpy/raw/main/sn/et${{ matrix.program_number }}.py
           ls
           python et${{ matrix.program_number }}.py
+        continue-on-error: true  # This step will not cause the job to fail if it encounters an error
